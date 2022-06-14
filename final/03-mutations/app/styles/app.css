@@ -1,0 +1,459 @@
+/*#region resets */
+
+*,
+:after,
+:before {
+  box-sizing: inherit;
+}
+
+:where(html, body, blockquote, button, dd, dl, fieldset, figure, h1, h2, h3, h4, h5, h6, hr, input, legend, menu, ol, optgroup, p, pre, select, textarea, ul) {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+  line-height: var(--line-height-base);
+  -webkit-text-size-adjust: 100%;
+  -moz-tab-size: var(--tab-size-base);
+  -o-tab-size: var(--tab-size-base);
+  tab-size: var(--tab-size-base);
+  font-family: var(--font-fam-sans);
+}
+
+body {
+  line-height: inherit;
+}
+
+:where(hr) {
+  height: 0;
+  color: inherit;
+  border-top-width: 1px;
+}
+
+:where(abbr[title]) {
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+:where(a) {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+:where(a:hover) {
+  text-decoration: underline;
+}
+
+:where(b, strong) {
+  font-weight: bolder;
+}
+
+:where(code, kbd, pre, samp) {
+  font-family: var(--font-fam-sans);
+  font-size: 1em;
+}
+
+:where(small) {
+  font-size: 80%;
+}
+
+:where(sub, sup) {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: initial;
+}
+
+:where(sub) {
+  bottom: -0.25em;
+}
+
+:where(sup) {
+  top: -0.5em;
+}
+
+:where(table) {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+
+:where(button, input, optgroup, select, textarea) {
+  border: 0;
+  box-shadow: 0;
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+}
+
+:where(button, select) {
+  text-transform: none;
+}
+
+:where([type="button"], [type="reset"], [type="submit"], button) {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: initial;
+  background-image: none;
+}
+
+:-moz-focusring {
+  outline: auto;
+}
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+:where(progress) {
+  vertical-align: initial;
+}
+
+:where(::-webkit-inner-spin-button, ::-webkit-outer-spin-button) {
+  height: auto;
+}
+
+:where([type="search"]) {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+:where(::-webkit-search-decoration) {
+  -webkit-appearance: none;
+}
+
+:where(::-webkit-file-upload-button) {
+  -webkit-appearance: none;
+  font: inherit;
+}
+
+:where(summary) {
+  display: list-item;
+}
+
+:where(menu, ol, ul) {
+  list-style: none;
+}
+
+:where(textarea) {
+  resize: vertical;
+}
+
+:where(input::-moz-placeholder, textarea::-moz-placeholder) {
+  opacity: 1;
+  color: #9ca3af;
+}
+
+:where(input::placeholder, textarea::placeholder) {
+  opacity: 1;
+  color: #9ca3af;
+}
+
+:where([role="button"], button) {
+  cursor: pointer;
+}
+
+:where(:disabled, [aria-disabled="true"]) {
+  cursor: default;
+}
+
+:where(audio, canvas, embed, iframe, img, object, svg, video) {
+  display: block;
+  vertical-align: middle;
+}
+
+:where(img, video) {
+  max-width: 100%;
+  height: auto;
+}
+
+:where([hidden]) {
+  display: none;
+}
+
+/*#endregion */
+
+/*#region global */
+
+:root {
+  --container-max-width: 1024px;
+  --container-gap: 1rem;
+  --line-height-base: 1.5;
+  --tab-size-base: 4;
+  --font-fam-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  --font-fam-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    Liberation Mono, Courier New, monospace;
+  --font-size-h1: 1.5rem;
+  --font-size-h2: 1.375rem;
+  --font-size-h3: 1.25rem;
+  --font-size-h4: 1.125rem;
+  --font-size-h5: 1.0625rem;
+  --font-size-h6: 1.0625rem;
+  --font-size-p: 1rem;
+  --font-size-p-lg: 1.125rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --font-size-h1: 2rem;
+    --font-size-h2: 1.5rem;
+    --font-size-h3: 1.325rem;
+    --font-p-lg: 1.25rem;
+  }
+}
+
+select,
+textarea,
+input:where([type="text"], [type="password"], [type="email"], [type="search"], [type="tel"], [type="url"], [type="number"], [type="date"], [type="month"], [type="week"], [type="time"], [type="datetime"], [type="datetime-local"], [type="checkbox"]) {
+  border: 1px solid #333;
+  padding: 0.25rem 0.375rem;
+  border-radius: 3px;
+}
+
+select,
+input:where([type="text"], [type="password"], [type="email"], [type="search"], [type="tel"], [type="url"], [type="number"], [type="date"], [type="month"], [type="week"], [type="time"], [type="datetime"], [type="datetime-local"]) {
+  height: 2.125rem;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0%;
+  min-height: 100vh;
+}
+
+body > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: var(--container-max-width);
+  max-width: calc(100% - var(--container-gap) * 2);
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+:where(body > header h1) {
+  font-size: var(--font-size-h1);
+  font-weight: bold;
+}
+
+:where(body > header nav) {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  font-weight: bold;
+}
+
+body > :where(header + div) {
+  width: var(--container-max-width);
+  max-width: calc(100% - var(--container-gap) * 2);
+  margin: 0 auto;
+  flex: 1 1 0%;
+}
+
+body > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: var(--container-max-width);
+  max-width: calc(100% - var(--container-gap) * 2);
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+:where(:disabled, [aria-disabled="true"], [data-disabled="true"]) {
+  opacity: 0.625;
+  pointer-events: none;
+  pointer-events: none;
+}
+
+/*#endregion */
+
+/*#region components */
+
+.button {
+  flex: 0 0 auto;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.75rem;
+  border: 0;
+  height: 2.125rem;
+  border-radius: 3px;
+  background-color: royalblue;
+  color: #fff;
+  font-weight: bold;
+  user-select: none;
+  text-transform: none;
+  text-decoration: none;
+}
+
+.button:where(:active) {
+  background-color: rgb(41, 78, 189);
+}
+
+/*#endregion */
+
+/*#region routes */
+
+.projects-route main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.projects-route main > :where(h1, h2) {
+  font-size: var(--font-size-h2);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.projects-list {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+.projects-route main aside {
+  display: flex;
+}
+
+.project-route main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-route main > header {
+  max-width: 550px;
+}
+
+.project-route main > header :where(h1, h2) {
+  font-size: var(--font-size-h2);
+  font-weight: bold;
+}
+
+.project-route main > header p {
+  font-size: var(--font-size-p-lg);
+}
+
+.project-route main > header button {
+  background-color: crimson;
+  margin-top: 1rem;
+}
+
+.project-route main > header button:active {
+  background-color: rgb(174, 11, 44);
+}
+
+.project-route main > section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-route main > section > :where(h2) {
+  font-size: var(--font-size-h3);
+  font-weight: bold;
+  margin-bottom: -0.5rem;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.todo-item form {
+  display: contents;
+}
+
+.todo-item label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.todo-item button {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 1;
+  padding: calc(0.125rem - 2px) 0.375rem;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  height: 1rem;
+  white-space: nowrap;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  user-select: none;
+}
+
+.project-route main aside :where(h2, h3) {
+  font-size: var(--font-size-h4);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.create-task {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.create-project-route main > :where(h1, h2) {
+  font-size: var(--font-size-h2);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.create-project-route form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 500px;
+}
+
+.create-project-route form label {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-project-route form button {
+  width: fit-content;
+}
+
+/*#endregion */
+
+/*#region utilities */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/*#endregion */
