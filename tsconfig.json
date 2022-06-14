@@ -1,0 +1,17 @@
+{
+  "files": [],
+  "exclude": ["node_modules"],
+  "references": [
+    { "path": "exercise/01-remix-intro" },
+    { "path": "final/01-remix-intro" },
+
+    { "path": "exercise/02-data-loading" },
+    { "path": "final/02-data-loading" },
+
+    { "path": "exercise/03-mutations" },
+    { "path": "final/03-mutations" },
+
+    { "path": "exercise/04-optimism" },
+    { "path": "final/04-optimism" },
+  ]
+}
