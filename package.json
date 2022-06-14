@@ -9,7 +9,6 @@
     "build": "node ./scripts/build",
     "dev": "node dev",
     "diff": "node diff",
-    "// setup": "npm install && node ./scripts/setup && run-p typecheck lint build",
     "setup": "npm install && node ./scripts/setup && npm run build"
   },
   "repository": {
