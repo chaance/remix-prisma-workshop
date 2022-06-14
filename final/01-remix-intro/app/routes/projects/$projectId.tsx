@@ -67,7 +67,3 @@ interface LoaderData {
 }
 
 export type { LoaderData as ProjectLoaderData };
-
-function isValidProjectId(pid: any): pid is string {
-  return typeof pid === "string";
-}

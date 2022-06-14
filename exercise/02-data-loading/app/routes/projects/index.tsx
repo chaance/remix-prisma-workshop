@@ -1,5 +1,4 @@
 import { Link } from "@remix-run/react";
-import type { Project } from "~/types";
 
 const projects = [
   { id: "001", name: "Prepare Remix/Prisma workshop" },
@@ -26,8 +25,4 @@ export default function ProjectsRoute() {
       )}
     </main>
   );
-}
-
-interface LoaderData {
-  projects: Pick<Project, "name" | "id">[];
 }
