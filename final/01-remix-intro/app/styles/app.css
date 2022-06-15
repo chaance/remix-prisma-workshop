@@ -254,7 +254,7 @@ body > header {
   font-weight: bold;
 }
 
-body > :where(header + div) {
+body > div {
   width: var(--container-max-width);
   max-width: calc(100% - var(--container-gap) * 2);
   margin: 0 auto;
