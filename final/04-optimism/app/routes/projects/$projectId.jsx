@@ -34,7 +34,10 @@ export default function ProjectRoute() {
   let createFetcher = useFetcher();
   let deleteFetcher = useFetcher();
 
-  let isCreatingTodo = createFetcher.state === "submitting";
+  let isCreatingTodo =
+    createFetcher.state === "submitting" ||
+    (createFetcher.state === "loading" &&
+      createFetcher.type === "actionReload");
 
   let todoWasCreated =
     createFetcher.type === "done" && !!createFetcher.data?.todo;
@@ -122,6 +125,23 @@ function TodoItem({ todo, disabled }) {
   ) {
     isCompleted = Boolean(completeFetcher.submission.formData.get("completed"));
   }
+
+  let erroredWhileCompleting = false;
+  if (completeFetcher.type === "done") {
+    if (completeFetcher.data && completeFetcher.data.todo) {
+      todo = completeFetcher.data.todo;
+      isCompleted = todo.completed;
+    } else {
+      isCompleted = todo.completed;
+      erroredWhileCompleting = true;
+    }
+  }
+
+  React.useEffect(() => {
+    if (erroredWhileCompleting) {
+      window.alert("Oh no, something went wrong while completing the task!");
+    }
+  }, [erroredWhileCompleting]);
 
   let isDeleting =
     // is currently submitting
