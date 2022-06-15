@@ -1,7 +1,7 @@
 import * as React from "react";
-import { json, redirect } from "@remix-run/node";
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { useCatch, useLoaderData, useFetcher, Form } from "@remix-run/react";
+import { json } from "@remix-run/node";
+import type { LoaderFunction } from "@remix-run/node";
+import { useCatch, useLoaderData, useFetcher } from "@remix-run/react";
 import { prisma } from "~/db.server";
 import type { Project, Todo } from "~/types";
 
@@ -31,40 +31,10 @@ export let loader: LoaderFunction = async (args) => {
   }
 };
 
-export let action: ActionFunction = async ({ params, request }) => {
-  let { projectId } = params;
-  if (!isValidProjectId(projectId)) {
-    throw json(null, 404);
-  }
-
-  let formData = await request.formData();
-  let action = formData.get("action");
-
-  switch (action) {
-    case "delete": {
-      try {
-        await prisma.project.delete({
-          where: { id: projectId },
-        });
-        return redirect("/projects");
-      } catch (fetchError) {
-        if (fetchError instanceof Response) {
-          throw fetchError;
-        }
-        throw json(null, {
-          status: 500,
-          statusText: "There was an error deleting the project",
-        });
-      }
-    }
-    default:
-      throw json(null, 400);
-  }
-};
-
 export default function ProjectRoute() {
   let { project } = useLoaderData<LoaderData>();
   let createFetcher = useFetcher();
+  let deleteFetcher = useFetcher();
 
   return (
     <main>
@@ -73,11 +43,12 @@ export default function ProjectRoute() {
           <h1>{project.name}</h1>
           <p>{project.description}</p>
         </div>
-        <Form method="post">
-          <button className="button" name="action" value="delete">
-            Delete Project
-          </button>
-        </Form>
+        <deleteFetcher.Form
+          method="post"
+          action={`/projects/${project.id}/delete`}
+        >
+          <button className="button">Delete Project</button>
+        </deleteFetcher.Form>
       </header>
       <hr />
       <section>

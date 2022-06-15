@@ -14,40 +14,58 @@ export let action: ActionFunction = async ({ request }) => {
   let description = formData.get("description");
 
   if (typeof name !== "string") {
-    throw json(`Invalid value for name; expected a string`, 422);
+    throw json(null, {
+      statusText: "Invalid value for name; expected a string",
+      status: 422,
+    });
   }
   if (name.length <= 0) {
-    throw json(`Invalid value for name; expected a non-empty string`, 422);
+    throw json(null, {
+      statusText: "Invalid value for name; expected a non-empty string",
+      status: 422,
+    });
   }
   if (description && typeof description !== "string") {
-    throw json(`Invalid value for ${description}; expected a string`, 422);
+    throw json(null, {
+      statusText: "Invalid value for description; expected a string",
+      status: 422,
+    });
+  }
+
+  let user;
+  let project;
+  try {
+    user = await prisma.user.findFirst();
+  } catch (err) {
+    throw json(null, {
+      status: 500,
+      statusText: "`There was an error fetching the user`",
+    });
+  }
+
+  if (!user) {
+    throw Error(
+      "No user found, crash the app because you need to run the DB seed script!"
+    );
   }
 
   try {
-    // TODO: Implement when we have auth setup
-    let user = await prisma.user.findFirst();
-    if (!user) {
-      throw Error(
-        "No user found. Run the prisma seed script first before attempting to use the database."
-      );
-    }
-
-    let project = await prisma.project.create({
+    project = await prisma.project.create({
       data: {
         name,
         description: description || "",
         userId: user.id,
       },
     });
-    return redirect(`/projects/${project.id}`);
   } catch (fetchError) {
-    if (fetchError instanceof Response) {
-      throw fetchError;
-    }
     let statusText = "There was an error creating the project";
     handlePrismaClientError(fetchError, statusText);
-    throw json(null, { status: 500, statusText });
+    throw json(null, {
+      status: 500,
+      statusText,
+    });
   }
+  return redirect(`/projects/${project.id}`);
 };
 
 export default function CreateProjectRoute() {
